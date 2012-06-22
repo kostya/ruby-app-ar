@@ -3,6 +3,9 @@ RubyAppAr
 
 [RubyApp](http://github.com/kostya/ruby-app) extension, adds ActiveRecord support.
 
+Install
+-------
+
 Use generator:
 
     ruby-app new_app --ar
@@ -25,5 +28,15 @@ Create
     
     db/migrate
     config/database.yml
-    
+
+
+Using
+-----
+
+Use as it is in Rails. But use APP_ENV for specify environment.
+
+Examples:
+
+    $ rake db:create APP_ENV=test
+    $ rake db:migrate
     
