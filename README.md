@@ -5,7 +5,7 @@ RubyAppAr
 
 Use generator:
 
-    ruby-app new_app -ar
+    ruby-app new_app --ar
     
 
 ### OR Manually
