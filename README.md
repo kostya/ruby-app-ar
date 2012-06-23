@@ -8,7 +8,7 @@ Install
 
 Use generator:
 
-    ruby-app new_app --ar
+    ruby-app new app --ar
     
 
 ### OR Manually
