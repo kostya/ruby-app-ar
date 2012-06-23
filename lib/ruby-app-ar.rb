@@ -9,7 +9,7 @@ if defined?(Application) && (Application.send(:identifier) rescue '-') == 'ruby-
   # add initializers
   App.initializer_paths << [
       File.join(File.dirname(__FILE__), %w{ config.rb }),
-      File.join(File.dirname(__FILE__), %w{ activerecord.rb })
+      File.join(File.dirname(__FILE__), %w{ init-activerecord.rb })
     ].map{|f| File.expand_path(f) }  
 
 end
