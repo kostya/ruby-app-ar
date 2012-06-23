@@ -187,7 +187,7 @@ namespace :db do
   end
 
   desc "Raises an error if there are pending migrations"
-  task :abort_if_pending_migrations => :environment do
+  task :pending_migrations => :environment do
     if defined? ActiveRecord
       pending_migrations = ActiveRecord::Migrator.new(:up, 'db/migrate').pending_migrations
 
@@ -381,7 +381,11 @@ def drop_database(config)
   when 'mysql'
     ActiveRecord::Base.connection.drop_database config['database']
   when /^sqlite/
-    FileUtils.rm(File.join(Application.root, config['database']))
+    if config['database'].start_with?('db')
+      FileUtils.rm(File.join(Application.root, config['database']))
+    else
+      FileUtils.rm(config['database'])
+    end
   when 'postgresql'
     ActiveRecord::Base.establish_connection(config.merge('database' => 'postgres', 'schema_search_path' => 'public'))
     ActiveRecord::Base.connection.drop_database config['database']
