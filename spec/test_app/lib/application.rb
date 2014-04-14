@@ -2,7 +2,7 @@
 
 class Application
   class << self
-  
+
     def name
       "11"
     end

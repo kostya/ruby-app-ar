@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version = RubyAppAr::VERSION
 
   s.authors = ["Makarchev Konstantin"]
-  
+
   s.description = %q{RubyApp extension, adds ActiveRecord support}
   s.summary = %q{RubyApp extension, adds ActiveRecord support}
 
@@ -20,9 +20,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activerecord'
   s.add_dependency 'ruby-app', ">= 0.1.4"
-  
+
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"
   s.add_development_dependency "sqlite3"
-   
+
 end

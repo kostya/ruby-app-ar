@@ -9,15 +9,15 @@ App.config.define :default_ar do
       YAML.load(
         ERB.new(
           File.read(File.join(App.root, %w{config database.yml} ))
-        ).result        
+        ).result
       )
     rescue
       raise "Not found config/database.yml"
     end
   end
-  
-  database_settings do     
+
+  database_settings do
     App.config.database_yml[App.env]
   end
-  
+
 end

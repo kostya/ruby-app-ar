@@ -5,7 +5,7 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :a
       t.timestamps
     end
-    
+
     add_index :tasks, [:a]
   end
 
