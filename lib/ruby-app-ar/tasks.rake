@@ -41,7 +41,7 @@ namespace :db do
             $stderr.puts "Couldn't create database for #{config.inspect}"
           end
         end
-        return # Skip the else clause of begin/rescue    
+        return # Skip the else clause of begin/rescue
       else
         ActiveRecord::Base.establish_connection(config)
         ActiveRecord::Base.connection
@@ -108,7 +108,19 @@ namespace :db do
   desc "Migrate the database through scripts in db/migrate. Target specific version with VERSION=x. Turn off output with VERBOSE=false."
   task :migrate => :environment do
     ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
-    ActiveRecord::Migrator.migrate("db/migrate/", ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
+
+    version = ENV["VERSION"] ? ENV["VERSION"].to_i : nil
+    less52 = ActiveRecord.version < Gem::Version.create("5.2.0")
+    less60 = ActiveRecord.version < Gem::Version.create("6.0.0")
+
+    if less52
+      ActiveRecord::Migrator.migrate("db/migrate/", version)
+    elsif less60
+      ActiveRecord::MigrationContext.new("db/migrate/").migrate(version)
+    else
+      ActiveRecord::MigrationContext.new("db/migrate/", ActiveRecord::SchemaMigration).migrate(version)
+    end
+
     Rake::Task["db:schema:dump"].invoke if ActiveRecord::Base.schema_format == :ruby
   end
 
