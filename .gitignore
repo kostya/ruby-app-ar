@@ -2,3 +2,5 @@ TODO
 *.gem
 Gemfile.lock
 *.log
+.bundle
+.ruby-version
